@@ -1,0 +1,32 @@
+function sendMessageToBot(botUrl, message) {
+  return fetch(botUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ message })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Bot response:', data);
+    return data;
+  })
+  .catch(error => {
+    console.error('Error sending message to bot:', error);
+    throw error;
+  });
+}
+This function takes in two parameters:
+
+botUrl: a string representing the URL of the bot's API endpoint
+message: a string representing the message you want to send to the bot
+The function uses fetch to send a POST request to the bot's API endpoint with the message as the request body. It then returns a Promise that resolves with the bot's response data as a JavaScript object.
+
+To use this function, you would call it with the bot URL and message you want to send, like this:
+sendMessageToBot('https://my-bot-api.com/messages', 'Hello, bot!')
+  .then(response => {
+    console.log('Bot response:', response);
+  })
+  .catch(error => {
+    console.error('Error sending message to bot:', error);
+  });
